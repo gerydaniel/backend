@@ -30,19 +30,20 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this._usuarioServicio.signup);
   }
 
   enviarDatos() {
     console.log(this.usuario);
+
     this._usuarioServicio.signup(this.usuario).subscribe(
       Response => {
         this.identity = Response;
-
         if (this.identity.length <= 1) {
           console.log('Error en el servidor');
         } else {
           if (!this.identity.status) {
-            localStorage.setItem('identity', JSON.stringify(this.identity));
+            localStorage.setItem('token', JSON.stringify(this.identity));
           }
         }
       },

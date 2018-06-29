@@ -1,9 +1,10 @@
 <?php
 namespace AppBundle\Services;
+use Doctrine\ORM\EntityManager;
 
 class Helpers{
-/*public $manager;
-public function __construct($manager){
+public $manager;
+/*/public function __construct($manager){
 
 	$this->manager =$manager;
 }*/

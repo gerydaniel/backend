@@ -7,18 +7,20 @@ use Doctrine\ORM\EntityManager;
 
 class JwtAuth{
 	public $manager;
+	public $key;
 
 
 	public function  __construct (EntityManager  $manager)
 	{
 	$this->manager =$manager;
+	$this->key = 'jholasollaclave12334535';
 	}
 
 
 
 
 
-public function signup($email,$password)
+public function signup($email,$password,$getHash = null)
 {
 	$user = $this->manager->getRepository('BackendBundle:User')->findOneBy(array(
 		"email"=>$email,
@@ -30,21 +32,60 @@ public function signup($email,$password)
 
 	}
 	if($signup==true){
-		$data= array (
-			'status'=> 'succes',
-			'user'=>$user
-			//'user'=> $user
-			);
+//GENERAR TOKEN JWT
+		$token =array(
+			"sub"=> $user ->getId(),
+			"email"=>$user->getEmail(),
+			"name"=>$user->getName(),
+			"surname"=> $user->getSurname(),
+			"iat"=>time(),
+			"exp"=>time()+(5*60)
+					);
+		//genrar el token
+		$jwt =JWT::encode($token,$this->key,'HS256');
+		$decoded = JWT::decode($jwt,$this->key,array('HS256'));
+		if($getHash == null){
+			$data=$jwt;
 
-	}else{
+		}else
+		{
+			$data=$decoded;
+		}
+
+		}else{
 		$data= array (
 			'status'=> 'error',
 			'data'=> 'error login!!!'
 			);
 
 	}
-	//return $email." ".$password;
+
 	return $data;
 }
+	public function checkToken($jwt,$getIdentity = false){
+		$auth = false;
 
+		//decodifcar el oken
+		try{
+			$decoded = JWT::decode($jwt,$this->key,array('HS256'));
+		}catch(\UnexpectedValueExcpetion $e){
+			$auth =false;
+		}catch(\DomainException $e){
+			$auth =false;
+		}
+		if(isset ($decoded)&&is_object ($decoded) && isset($decoded->sub)){
+			$auth = true;
+
+		}else
+		{
+			$auth =false;
+		}
+		if( $getIdentity == false){
+			return $auth;
+		}
+		else{
+			return $decoded;
+		}
+	
+	}
 }

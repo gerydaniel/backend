@@ -1,4 +1,10 @@
 <div class="text-center">
+  <div class="alert alert-success" *ngIf="Identity && Identity.sub">
+    BIenvenido
+  </div>
+  <div class="alert alert-danger" *ngIf="Identity && Identity.data">
+    Contraseña incorrecta
+  </div>
   <form class="form-signin" #FormularioCuenta="ngForm" (ngSubmit)="enviarDatos()">
     <img class="mb-4" src="../../../assets/imagenes/logo.png" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Ingreso</h1>

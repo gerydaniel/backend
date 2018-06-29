@@ -43,22 +43,28 @@ class DefaultController extends Controller
             //verificacion de variables
             $email=(isset ($params->email)) ? $params->email :null;
             $password=(isset ($params->password))?$params->password :null;
+            $getHash=(isset ($params->getHash))?$params->getHash :null;
             //validadion de emial
             $emailConstraint =new Assert\Email();
             $emailConstraint->message = "El correo no es valido";
             $validate_email = $this ->get ("validator") -> validate($email,$emailConstraint);
 
             //comprarsi es valido
-            if (count($validate_email)==0 && $password !=null){
+            if ($email != null && count($validate_email)==0 && $password !=null){
 
                $jwt_auth=$this->get(JwtAuth::class);
-               $signup= $jwt_auth -> signup($email, $password);
-                $data=array(
-              'status'=>'success',
-               'data' => 'email correcto',
-                'signup'=>$signup
-           );
 
+               if($getHash==null || $getHash == false){
+
+                $signup= $jwt_auth -> signup($email, $password);
+
+               }else
+               {
+                 $signup= $jwt_auth -> signup($email, $password,true);
+               }
+              
+               return $this->json($signup);
+       
 
             }else{
 
@@ -74,15 +80,34 @@ class DefaultController extends Controller
 
         return $helpers->json($data);
     }
-    public function pruebasAction(){
+    public function pruebasAction(Request $request){
 
-        $em = $this->getDoctrine()-> getManager();
-        $userRepo= $em ->getRepository('BackendBundle:User');
-        $users=$userRepo->findAll();
-
+        $token= $request->get("authorization",null);
+        $jwt_auth = $this->get(JwtAuth::class);
         $helpers = $this->get(Helpers::class);
-        return  $helpers->json($users);
-        die();
+        if($token && $jwt_auth-> checkToken($token) == true ){
+
+             $em = $this->getDoctrine()-> getManager();
+             $userRepo= $em ->getRepository('BackendBundle:User');
+             $users=$userRepo->findAll();
+
+            
+             return  $helpers->json(array(
+                    'status'=>'success',
+                    'users'=> $users
+
+             ));
+
+        }else
+        {
+            return  $helpers->json(array(
+                    'status'=>'error',
+                    'users'=> 'Login Failed!!!'));
+
+        }
+
+       
+        
    }
 
 

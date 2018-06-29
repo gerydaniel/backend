@@ -6,10 +6,23 @@ default_index:
 default_login:
     path: /login
     defaults: { _controller: "AppBundle:Default:login" }
-    methods: post
+    methods: POST
+
 
 default_pruebas:
     path: /pruebas
     defaults: { _controller: "AppBundle:Default:pruebas" }
-    methods: post
+    methods: POST
+
+user_new:
+    path: /new
+    defaults: { _controller: "AppBundle:User:new" }
+    methods: POST
+
+user_edit:
+    path: /edit
+    defaults: { _controller: "AppBundle:User:edit" }
+    methods: POST
+
+
 
