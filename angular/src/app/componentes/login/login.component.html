@@ -1,17 +1,22 @@
 <div class="text-center">
-  <form class="form-signin">
+  <form class="form-signin" #FormularioCuenta="ngForm" (ngSubmit)="enviarDatos()">
     <img class="mb-4" src="../../../assets/imagenes/logo.png" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Ingreso</h1>
-    <label for="inputEmail" class="sr-only">nombre de usuario</label>
-    <input type="email" id="inputEmail" class="form-control" placeholder="usuario" required="" autofocus="">
-    <label for="inputPassword" class="sr-only">contraseña</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="contraseña" required="">
-    <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" value="remember-me"> recuerdame
-      </label>
-    </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">iniciar sesión</button>
+    <label for="correo" class="sr-only">correo</label>
+    <input type="email" id="correo" name="correo" #correo="ngModel" [(ngModel)]="usuario.correo" class="form-control" placeholder="usuario"
+      required="" autofocus="">
+    <span class="text-danger" *ngIf="!correo.valid && correo.touched">
+      <strong>Debe ingresar un correo valido</strong>
+    </span>
+    <br>
+    <label for="contrasenia" class="sr-only">contraseña</label>
+    <input type="password" id="contrasenia" name="contrasenia" #contrasenia="ngModel" [(ngModel)]="usuario.contrasenia" class="form-control" placeholder="contraseña"
+      required="">
+    <span class="text-danger" *ngIf="!contrasenia.valid && contrasenia.touched">
+      <strong>debe ingresar una contraseña valida</strong>
+    </span>
+    <br>    
+    <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!FormularioCuenta.form.valid">iniciar sesión</button>
     <p class="mt-5 mb-3 text-muted">© Derechos Reservados 2018</p>
   </form>
 </div>

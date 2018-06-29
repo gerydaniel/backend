@@ -1,3 +1,58 @@
-<p>
-  register works!
-</p>
+<br>
+<div class="container">
+  <div class="col-md-6 order-md-1">
+    <h4 class="mb-3">
+      <font style="vertical-align: inherit;">
+        <font style="vertical-align: inherit;">Datos personales</font>
+      </font>
+    </h4>
+    <form class="needs-validation" novalidate="">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="firstName">
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Nombre(s)</font>
+            </font>
+          </label>
+          <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+          <div class="invalid-feedback">
+            el nombre es requerido.
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="lastName">
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Apellido(s)</font>
+            </font>
+          </label>
+          <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+          <div class="invalid-feedback">
+            el apellido es requerido
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="email">
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Correo electrónico </font>
+          </font>
+          <span class="text-muted">
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">(opcional)</font>
+            </font>
+          </span>
+        </label>
+        <input type="email" class="form-control" id="email" placeholder="you@example.com">
+        <div class="invalid-feedback">
+          por favor ingrese un correo valido
+        </div>
+      </div>
+      <hr class="mb-4">
+      <button class="btn btn-primary btn-lg btn-block" type="submit">
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">registrar usuario</font>
+        </font>
+      </button>
+    </form>
+  </div>
+</div>

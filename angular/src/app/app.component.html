@@ -1,1 +1,71 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
+  <a class="navbar-brand" href="#">
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">
+        <img src="../assets/imagenes/Tarea.png" width="48" height="48" /> Sistema Gestion de tareas</font>
+    </font>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExample09">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" [routerLink]="['/']">
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">
+              <i class="fa fa-home"></i> Inicio </font>
+          </font>          
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/']">
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">
+              <i class="fa fa-plus"></i> Crear tarea</font>
+          </font>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/']">
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">
+              <i class="fa fa-cogs"></i> Ajustes</font>
+          </font>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/']">
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">
+              <i class="fa fa-sign-out"></i> salir</font>
+          </font>
+        </a>
+      </li>
+    </ul>
+    <div class="form-inline my-2 my-md-0">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/login']">
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">
+                <i class="fa fa-sign-in"></i> Acceder</font>
+            </font>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/register']">
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">
+                <i class="fa fa-signing"></i> Registro</font>
+            </font>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
 <router-outlet></router-outlet>

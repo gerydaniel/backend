@@ -10,7 +10,20 @@
 </head>
 
 <body>
-  <app-root></app-root>
+  <app-root>    
+    <div class="app-loading text-center">
+      <svg  width="300" height="300">
+        <linearGradient id="linearColors" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="5%" stop-color="#000000"></stop>
+          <stop offset="100%" stop-color="#FFAABB"></stop>
+        </linearGradient>
+        <circle class="rotacion" r="120" cx="150" cy="150" class="external-circle" stroke-width="4" fill="none" stroke="url(#linearColors)"></circle>
+        <image href="/assets/imagenes/logo.png" x="75" y="75" height="150px" width="150px" />
+      </svg>
+      Cargando . . .
+    </div>
+
+  </app-root>
 </body>
 
 </html>
