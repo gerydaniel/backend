@@ -31,7 +31,6 @@ export class UsuarioServicio {
         } else {
             this.identity = null;
         }
-        console.log(this.identity);
         // retorna la identidad
         return identity;
     }
@@ -46,8 +45,23 @@ export class UsuarioServicio {
             this.token = null;
         }
         console.log(this.token);
+
         // retorna el token
         return token;
     }
 
+    register(usuario_registro) {
+        const json = JSON.stringify(usuario_registro);
+        const params = 'json=' + json;
+        const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + '/new', params, { headers: headers }).map(res => res.json());
+    }
+
+    update_user(usuario_update) {
+        console.log(usuario_update);
+        const json = JSON.stringify(usuario_update);
+        const params = 'json=' + json + '&authorization=' + this.getToken();
+        const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + '/edit', params, { headers: headers }).map(res => res.json());
+    }
 }

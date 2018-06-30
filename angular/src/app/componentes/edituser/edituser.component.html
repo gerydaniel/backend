@@ -3,17 +3,18 @@
   <div class="col-md-6 order-md-1">
     <h4 class="mb-3">
       <font style="vertical-align: inherit;">
-        <font style="vertical-align: inherit;">Datos personales</font>
+        <font style="vertical-align: inherit;">Modificar datos</font>
       </font>
     </h4>
 
     <div class="alert alert-success" *ngIf="status == 'succes'">
-      <strong>Te has registrado correctamente, ingresa aqui <a [routerLink]="['/login']"> desde aqui</a> </strong>
+      <strong>se ha modificado correctamente el registro</strong>
     </div>
     <div class="alert alert-danger" *ngIf="status == 'error'">
-      <strong>Ha ocurrido un error al registrarse, por favor verifique los datos e intente nuevamente </strong>
+      <strong>Ha ocurrido un error al modficar los datos, por favor verifique e intente nuevamente </strong>
     </div>
-    <form class="needs-validation" novalidate="" #registroForm="ngForm" (ngSubmit)="CrearUsuario(); registroForm.reset();">
+
+    <form class="needs-validation" novalidate="" #registroForm="ngForm" (ngSubmit)="ModificarUsuario();">
       <div class="row">
         <div class="col-md-6 mb-3">
           <label for="Nombre">
@@ -46,7 +47,7 @@
             <font style="vertical-align: inherit;">Correo electrónico </font>
           </font>
         </label>
-        <input type="email" class="form-control" id="correo" name="correo" #correo="ngModel" [(ngModel)]="usuario.email" placeholder="you@example.com">
+        <input type="email" class="form-control" id="correo" name="correo" #correo="ngModel" [(ngModel)]="usuario.email" placeholder="you@example.com" readonly="readonly">
         <span class="text-danger" *ngIf="!contrasenia.valid && contrasenia.touched">
           <strong>debe ingresar un correo valido</strong>
         </span>
@@ -54,19 +55,18 @@
       <div class="mb-3">
         <label for="contrasenia">
           <font style="vertical-align: inherit;">
-            <font style="vertical-align: inherit;">Contraseña </font>
+            <font style="vertical-align: inherit;">Contraseña <span class="text-danger">(para modificar debe ingresar la contraseña)</span></font>
           </font>
         </label>
-        <input type="password" class="form-control" id="contrasenia" name="contrasenia" #contrasenia="ngModel" [(ngModel)]="usuario.password"
-          required>
+        <input type="password" class="form-control" id="contrasenia" name="contrasenia" #contrasenia="ngModel" [(ngModel)]="usuario.password" required="">
         <span class="text-danger" *ngIf="!contrasenia.valid && contrasenia.touched">
           <strong>debe ingresar una contraseña valida</strong>
         </span>
       </div>
       <hr class="mb-4">
-      <button class="btn btn-primary btn-lg btn-block" type="submit" [disabled]="!registroForm.form.valid">
+      <button class="btn btn-warning btn-lg btn-block" type="submit" [disabled]="!registroForm.form.valid">
         <font style="vertical-align: inherit;">
-          <font style="vertical-align: inherit;">registrar usuario</font>
+          <font style="vertical-align: inherit;">modificar datos</font>
         </font>
       </button>
     </form>

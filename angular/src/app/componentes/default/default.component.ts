@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Route } from '@angular/compiler/src/core';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 
 @Component({
   selector: 'app-default',
@@ -11,7 +10,7 @@ export class DefaultComponent implements OnInit {
 
   constructor(
     private _route: ActivatedRoute,
-    private _router: Route
+    private _router: Router
   ) { }
 
   ngOnInit() {

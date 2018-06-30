@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.CerrarSesion();
+    this.RedireccionPagina();
   }
 
   CerrarSesion() {
@@ -49,7 +50,15 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  RedireccionPagina() {
+    const identity = this._usuarioServicio.getIdentity();
+    if (identity != null && identity.sub) {
+      this._router.navigate(['/']);
+    }
+  }
+
   enviarDatos() {
+    // obtener los datos del usuario
     this._usuarioServicio.signup(this.usuario).subscribe(
       respuesta => {
         this.identity = respuesta;
@@ -68,11 +77,11 @@ export class LoginComponent implements OnInit {
                 } else {
                   if (!this.identity.status) {
                     localStorage.setItem('token', JSON.stringify(this.token));
+                    window.location.href = '/';
                   }
                 }
               },
               error => {
-                console.log('error');
                 console.log(<any>error);
               }
             );
@@ -80,7 +89,6 @@ export class LoginComponent implements OnInit {
         }
       },
       error => {
-        console.log('error');
         console.log(<any>error);
       }
     );

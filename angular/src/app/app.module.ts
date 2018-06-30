@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { RegisterComponent } from './componentes/register/register.component';
 import { DefaultComponent } from './componentes/default/default.component';
+import { EdituserComponent } from './componentes/edituser/edituser.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { DefaultComponent } from './componentes/default/default.component';
     LoginComponent,
     RegisterComponent,
     DefaultComponent,
+    EdituserComponent,
   ],
   imports: [
     BrowserModule,
