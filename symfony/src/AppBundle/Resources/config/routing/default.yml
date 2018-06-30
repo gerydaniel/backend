@@ -24,5 +24,30 @@ user_edit:
     defaults: { _controller: "AppBundle:User:edit" }
     methods: POST
 
+task_new:
+    path: /new1
+    defaults: { _controller: "AppBundle:Task:new1" }
+    methods: post
+
+task_edit:
+    path: /edit1/{id}
+    defaults: { _controller: "AppBundle:Task:new1" , id:null}
+    methods: post
+
+task_list:
+    path: /list
+    defaults: { _controller: "AppBundle:Task:tasks" }
+    methods: post
+
+task_detail:
+    path: /detail/{id}
+    defaults: { _controller: "AppBundle:Task:task",  id:null }
+    methods: post
+
+task_search:
+    path: /search/{search}
+    defaults: { _controller: "AppBundle:Task:search",  search:null }
+    methods: post
+
 
 

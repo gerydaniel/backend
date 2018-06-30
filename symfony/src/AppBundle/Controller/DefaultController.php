@@ -48,6 +48,9 @@ class DefaultController extends Controller
             $emailConstraint =new Assert\Email();
             $emailConstraint->message = "El correo no es valido";
             $validate_email = $this ->get ("validator") -> validate($email,$emailConstraint);
+            
+            //cifrar la contraseña
+            $pwd =  hash ('sha256',$password);
 
             //comprarsi es valido
             if ($email != null && count($validate_email)==0 && $password !=null){
@@ -56,11 +59,11 @@ class DefaultController extends Controller
 
                if($getHash==null || $getHash == false){
 
-                $signup= $jwt_auth -> signup($email, $password);
+                $signup= $jwt_auth -> signup($email, $pwd);
 
                }else
                {
-                 $signup= $jwt_auth -> signup($email, $password,true);
+                 $signup= $jwt_auth -> signup($email, $pwd,true);
                }
               
                return $this->json($signup);
@@ -70,7 +73,7 @@ class DefaultController extends Controller
 
                  $data=array(
               'status'=>'error',
-               'data' => 'email incorssrecto');
+               'data' => 'email incorrecto');
             }
 
 

@@ -3,7 +3,7 @@ namespace AppBundle\Services;
 
 use Firebase\JWT\JWT;
 use Doctrine\ORM\EntityManager;
-/*use AppBundle\Doctrine\UserManager;*/
+
 
 class JwtAuth{
 	public $manager;
@@ -39,18 +39,20 @@ public function signup($email,$password,$getHash = null)
 			"name"=>$user->getName(),
 			"surname"=> $user->getSurname(),
 			"iat"=>time(),
-			"exp"=>time()+(5*60)
+			"exp"=>time()+(5*60*60*60)
 					);
 		//genrar el token
 		$jwt =JWT::encode($token,$this->key,'HS256');
 		$decoded = JWT::decode($jwt,$this->key,array('HS256'));
 		if($getHash == null){
-			$data=$jwt;
-
-		}else
-		{
-			$data=$decoded;
-		}
+				$data=$jwt;		
+			} else {
+				if(is_bool($getHash)===true){
+					$data=$decoded;					
+				} else {
+					$data=$jwt;
+				}				
+			}
 
 		}else{
 		$data= array (
