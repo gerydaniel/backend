@@ -1,0 +1,56 @@
+<br>
+<div class="container">
+  <div class="col-md-6 order-md-1">
+    <h4 class="mb-3">
+      <font style="vertical-align: inherit;">
+        <font style="vertical-align: inherit;">Modificar Tarea</font>
+      </font>
+    </h4>
+
+    <div class="alert alert-success" *ngIf="status == 'success'">
+      <strong>se ha creado correctamente la tarea</strong>
+    </div>
+    <div class="alert alert-danger" *ngIf="status == 'error'">
+      <strong>Ha ocurrido un error al modificar la tarea, por favor verifique los datos e intente nuevamente </strong>
+    </div>
+
+    <form class="needs-validation" #nuevaTareaForm="ngForm" (ngSubmit)="ModificarTarea();">
+      <div class="mb-3">
+        <label for="titulo">
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Titulo de la tarea </font>
+          </font>
+        </label>
+        <input type="text" class="form-control" id="Titulo" name="titulo" #titulo="ngModel" [(ngModel)]="tarea.title" placeholder=""
+        value="" required />
+        <span class="text-danger" *ngIf="!titulo.valid && titulo.touched">
+          <strong>debe ingresar un titulo valido</strong>
+        </span>
+      </div>
+      <div class="mb-3">
+        <label for="descripcion">
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Descripcion de la tarea </font>
+          </font>
+        </label>
+        <textarea class="form-control" id="descripcion" name="descripcion" #descripcion="ngModel" [(ngModel)]="tarea.description"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="estado">
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Estado de la tarea </font>
+          </font>
+        </label>
+        <select class="custom-select" id="estado" name="estado" #estado="ngModel" [(ngModel)]="tarea.status">
+          <option *ngFor="let estado of ListaEstados" [ngValue]="estado.value">{{estado.text}}</option>          
+        </select>        
+      </div>
+      <hr class="mb-4">
+      <button class="btn btn-success btn-lg btn-block" type="submit" [disabled]="!nuevaTareaForm.form.valid">
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Modificar Tarea</font>
+        </font>
+      </button>
+    </form>
+  </div>
+</div>

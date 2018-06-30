@@ -12,6 +12,8 @@ import { LoginComponent } from './componentes/login/login.component';
 import { RegisterComponent } from './componentes/register/register.component';
 import { DefaultComponent } from './componentes/default/default.component';
 import { EdituserComponent } from './componentes/edituser/edituser.component';
+import { NewtaskComponent } from './componentes/newtask/newtask.component';
+import { EdittaskComponent } from './componentes/edittask/edittask.component';
 
 
 @NgModule({
@@ -21,6 +23,8 @@ import { EdituserComponent } from './componentes/edituser/edituser.component';
     RegisterComponent,
     DefaultComponent,
     EdituserComponent,
+    NewtaskComponent,
+    EdittaskComponent,
   ],
   imports: [
     BrowserModule,

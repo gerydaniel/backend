@@ -1,1 +1,76 @@
+<br>
+<h4 class="text-center">
+  <font style="vertical-align: inherit;">
+    <font style="vertical-align: inherit;">Lista de Tareas</font>
+  </font>
+</h4>
+<br>
+<div class="container">
+  <div *ngIf="!identity || identity == null">
 
+  </div>
+
+  <div *ngIf="identity && identity.sub">
+
+    <div class="app-loading text-center" *ngIf="loading == 'show'">
+      <svg width="300" height="300">
+        <linearGradient id="linearColors" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="15%" stop-color="#000000"></stop>
+          <stop offset="100%" stop-color="#FFAABB"></stop>
+        </linearGradient>
+        <circle class="rotacion" r="120" cx="150" cy="150" class="external-circle" stroke-width="4" fill="none" stroke="url(#linearColors)"></circle>
+        <image href="/assets/imagenes/logo.png" x="75" y="75" height="150px" width="150px" />
+      </svg>
+      Cargando . . .
+    </div>
+
+    <!-- mostrar buscador -->
+    <ul class="pagination" *ngIf="tareas && tareas.length >=1">
+      <li class="page-item">
+        <a class="page-link" [routerLink]="['/index',paginaPrev]" aria-label="Anterior">
+          <span aria-hidden="true">&laquo; Anterior</span>
+        </a>
+      </li>
+      <li class="page-item" *ngFor="let pagina of paginas">
+        <a class="page-link" [routerLink]="['/index',pagina]">{{pagina}}</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" [routerLink]="['/index',paginaNext]" aria-label="Siguiente">
+          <span aria-hidden="true">Siguiente &raquo;</span>
+        </a>
+      </li>
+    </ul>
+    <div class="text-center small">
+
+      <table class="table table-hover table-striped" id="tareas" *ngIf="tareas && tareas.length >=1">
+        <thead>
+          <tr>
+            <th> Estado </th>
+            <th>Titulo</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of tareas">
+            <th>
+              <span class="label col-form-label-lg text-success " *ngIf="item.status == 'finished'">
+                Terminado
+              </span>
+              <span class="label col-form-label-lg text-warning" *ngIf="item.status == 'todo'">
+                En desarrollo
+              </span>
+              <span class="label col-form-label-lg text-primary" *ngIf="item.status == 'new'">
+                Nueva tarea
+              </span>
+            </th>
+            <th>{{item.title}}</th>
+            <th>
+              <a class="btn btn-warning" [routerLink]="['app-edittask',item.id]"><i class="fa fa-pencil" aria-hidden="true"></i> Modificar</a>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
