@@ -17,36 +17,20 @@
           <font style="vertical-align: inherit;">
             <font style="vertical-align: inherit;">
               <i class="fa fa-home"></i> Inicio </font>
-          </font>          
+          </font>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/']">
+        <a class="nav-link" [routerLink]="['/']" *ngIf="identity && identity.sub">
           <font style="vertical-align: inherit;">
             <font style="vertical-align: inherit;">
               <i class="fa fa-plus"></i> Crear tarea</font>
           </font>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/']">
-          <font style="vertical-align: inherit;">
-            <font style="vertical-align: inherit;">
-              <i class="fa fa-cogs"></i> Ajustes</font>
-          </font>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/']">
-          <font style="vertical-align: inherit;">
-            <font style="vertical-align: inherit;">
-              <i class="fa fa-sign-out"></i> salir</font>
-          </font>
-        </a>
-      </li>
     </ul>
     <div class="form-inline my-2 my-md-0">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav mr-auto" *ngIf="!identity">
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/login']">
             <font style="vertical-align: inherit;">
@@ -60,6 +44,24 @@
             <font style="vertical-align: inherit;">
               <font style="vertical-align: inherit;">
                 <i class="fa fa-signing"></i> Registro</font>
+            </font>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav mr-auto" *ngIf="identity && identity.sub">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/']" >
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">
+                <i class="fa fa-cogs"></i> Ajustes</font>
+            </font>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/login',1]">
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">
+                <i class="fa fa-sign-out"></i> salir</font>
             </font>
           </a>
         </li>

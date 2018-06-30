@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { UsuarioServicio } from '../../services/usuario.service';
+import { Token } from '@angular/compiler';
 
 
 @Component({
@@ -23,31 +24,63 @@ export class LoginComponent implements OnInit {
   ) {
     this.titulo = 'registrarse';
     this.usuario = {
-      'correo': '',
-      'contrasenia': '',
-      'gethash': 'false'
+      'email': '',
+      'password': '',
+      'getHash': true
     };
   }
 
   ngOnInit() {
-    console.log(this._usuarioServicio.signup);
+    this.CerrarSesion();
+  }
+
+  CerrarSesion() {
+    this._route.params.forEach((params: Params) => {
+      const cerrar = +params['id'];
+      if (cerrar === 1) {
+        localStorage.removeItem('identity');
+        localStorage.removeItem('token');
+
+        this.identity = null;
+        this.token = null;
+
+        window.location.href = '/login';
+      }
+    });
   }
 
   enviarDatos() {
-    console.log(this.usuario);
-
     this._usuarioServicio.signup(this.usuario).subscribe(
-      Response => {
-        this.identity = Response;
+      respuesta => {
+        this.identity = respuesta;
         if (this.identity.length <= 1) {
           console.log('Error en el servidor');
         } else {
           if (!this.identity.status) {
-            localStorage.setItem('token', JSON.stringify(this.identity));
+            localStorage.setItem('identity', JSON.stringify(this.identity));
+            // Obtener el token
+            this.usuario.getHash = false;
+            this._usuarioServicio.signup(this.usuario).subscribe(
+              respuestaToken => {
+                this.token = respuestaToken;
+                if (this.identity.length <= 1) {
+                  console.log('Error en el servidor');
+                } else {
+                  if (!this.identity.status) {
+                    localStorage.setItem('token', JSON.stringify(this.token));
+                  }
+                }
+              },
+              error => {
+                console.log('error');
+                console.log(<any>error);
+              }
+            );
           }
         }
       },
       error => {
+        console.log('error');
         console.log(<any>error);
       }
     );

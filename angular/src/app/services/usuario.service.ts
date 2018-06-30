@@ -17,34 +17,36 @@ export class UsuarioServicio {
 
     signup(usuario) {
         const json = JSON.stringify(usuario);
-        console.log(json);
         const params = 'json=' + json;
-        const headers = new Headers({ 'Content type': 'application/x-www-form-urlencoded' });
-
+        const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         return this._http.post(this.url + '/login', params, { headers: headers }).map(res => res.json());
     }
 
+    // obtiene el identity del local storage
     getIdentity() {
-
+        // obtenemos del local storage
         const identity = JSON.parse(localStorage.getItem('identity'));
-        if (identity !== undefined) {
+        if (identity !== 'undefined') {
             this.identity = identity;
         } else {
             this.identity = null;
         }
-
+        console.log(this.identity);
+        // retorna la identidad
         return identity;
     }
 
+    // obtiene el token del local storage
     getToken() {
-
+        // obtenemos del local storage
         const token = JSON.parse(localStorage.getItem('token'));
-        if (token !== undefined) {
+        if (token !== 'undefined') {
             this.token = token;
         } else {
             this.token = null;
         }
-
+        console.log(this.token);
+        // retorna el token
         return token;
     }
 

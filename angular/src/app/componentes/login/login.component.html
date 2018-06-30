@@ -1,28 +1,26 @@
 <div class="text-center">
-  <div class="alert alert-success" *ngIf="Identity && Identity.sub">
-    BIenvenido
-  </div>
-  <div class="alert alert-danger" *ngIf="Identity && Identity.data">
-    Contraseña incorrecta
-  </div>
   <form class="form-signin" #FormularioCuenta="ngForm" (ngSubmit)="enviarDatos()">
     <img class="mb-4" src="../../../assets/imagenes/logo.png" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Ingreso</h1>
     <label for="correo" class="sr-only">correo</label>
-    <input type="email" id="correo" name="correo" #correo="ngModel" [(ngModel)]="usuario.correo" class="form-control" placeholder="usuario"
+    <input type="email" id="correo" name="correo" #correo="ngModel" [(ngModel)]="usuario.email" class="form-control" placeholder="correo"
       required="" autofocus="">
     <span class="text-danger" *ngIf="!correo.valid && correo.touched">
       <strong>Debe ingresar un correo valido</strong>
     </span>
     <br>
     <label for="contrasenia" class="sr-only">contraseña</label>
-    <input type="password" id="contrasenia" name="contrasenia" #contrasenia="ngModel" [(ngModel)]="usuario.contrasenia" class="form-control" placeholder="contraseña"
-      required="">
+    <input type="password" id="contrasenia" name="contrasenia" #contrasenia="ngModel" [(ngModel)]="usuario.password" class="form-control"
+      placeholder="contraseña" required="">
     <span class="text-danger" *ngIf="!contrasenia.valid && contrasenia.touched">
       <strong>debe ingresar una contraseña valida</strong>
     </span>
-    <br>    
+    <br>
     <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!FormularioCuenta.form.valid">iniciar sesión</button>
+    <br>
+    <span class="alert alert-danger" *ngIf="identity && identity.data">
+      Correo o Contraseña incorrecta
+    </span>
     <p class="mt-5 mb-3 text-muted">© Derechos Reservados 2018</p>
   </form>
 </div>

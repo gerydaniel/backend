@@ -9,13 +9,14 @@ import { UsuarioServicio } from './services/usuario.service';
 })
 export class AppComponent implements OnInit {
   title = 'app';
+  public identity;
+  public token;
 
   constructor(private _usuarioServicio: UsuarioServicio) {
-
+    this.identity = this._usuarioServicio.getIdentity();
+    this.token = this._usuarioServicio.getToken();
   }
 
   ngOnInit() {
-    console.log(this._usuarioServicio.getIdentity);
-    console.log(this._usuarioServicio.getToken);
   }
 }

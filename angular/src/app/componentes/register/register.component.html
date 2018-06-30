@@ -6,7 +6,7 @@
         <font style="vertical-align: inherit;">Datos personales</font>
       </font>
     </h4>
-    <form class="needs-validation" novalidate="">
+    <form class="needs-validation" novalidate="" #registroForm="ngForm" (ngSubmit)="onSubmit()">
       <div class="row">
         <div class="col-md-6 mb-3">
           <label for="firstName">
@@ -36,16 +36,19 @@
           <font style="vertical-align: inherit;">
             <font style="vertical-align: inherit;">Correo electrónico </font>
           </font>
-          <span class="text-muted">
-            <font style="vertical-align: inherit;">
-              <font style="vertical-align: inherit;">(opcional)</font>
-            </font>
-          </span>
         </label>
         <input type="email" class="form-control" id="email" placeholder="you@example.com">
         <div class="invalid-feedback">
           por favor ingrese un correo valido
         </div>
+      </div>
+      <div class="mb-3">
+        <label for="contrasenia">
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Contraseña </font>
+          </font>
+        </label>
+        <input type="password" class="form-control" id="contrasenia" required>
       </div>
       <hr class="mb-4">
       <button class="btn btn-primary btn-lg btn-block" type="submit">
